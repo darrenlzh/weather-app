@@ -1,0 +1,239 @@
+body {
+  transition: background-color 1s ease;
+  margin: 0;
+}
+
+#main {
+  display: flex;
+  font-family: 'Lora', serif;
+  font-size: 15px;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  min-height: 600px;
+  flex-direction: column;
+}
+
+#main .container {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  border-bottom: 1px solid;
+  padding-bottom: 3px;
+  overflow-x: hidden;
+}
+
+#main .container #header {
+  font-family: 'Lora', serif;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 10px;
+  margin-bottom: 3px;
+  display: flex;
+  border-bottom: 1px solid;
+}
+
+#main .container #header #city {
+  font-size: 35px;
+}
+
+#main .container #header #region {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+#main .container #header #current-cond-text {
+  font-size: 10px;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+#main .container #header #current-temp {
+  font-size: 70px;
+}
+
+#main .container #hourly {
+  display: flex;
+  flex-direction: row;
+  width: 310px;
+  white-space: nowrap;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  padding: 5px 5px 0 5px;
+}
+
+#main .container #hourly::-webkit-scrollbar {
+  display: none;
+}
+
+#main .container #hourly #current-hour, #main .container #hourly .future-hour {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+#main .container #hourly #current-hour div, #main .container #hourly .future-hour div {
+  font-size: 10px;
+  margin-bottom: 5px;
+}
+
+#main .container #hourly #current-hour img, #main .container #hourly .future-hour img {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 5px;
+}
+
+#main .container #hourly #current-hour .hourly-temp, #main .container #hourly .future-hour .hourly-temp {
+  font-size: 15px;
+}
+
+#main .container > .row {
+  border-top: 1px solid;
+  padding-top: 10px;
+}
+
+#main .container > .row ~ .row {
+  border-top: none;
+  padding-top: 0;
+}
+
+#main .container .row {
+  display: flex;
+  flex-direction: row;
+  margin: 1px;
+  justify-content: space-between;
+}
+
+#main .container .row .day {
+  display: flex;
+  justify-content: flex-start;
+  width: 130px;
+  padding-left: 10px;
+}
+
+#main .container .row .forecast {
+  display: flex;
+  justify-content: space-around;
+  width: 150px;
+}
+
+#main .container .row .forecast img.day-cond-icon {
+  width: 30px;
+  height: 30px;
+  margin: -5px 50px 0 0;
+}
+
+#main .container .row .forecast .low {
+  opacity: 0.6;
+}
+
+#main .container .row .forecast .high, #main .container .row .forecast .low {
+  width: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+#main #toggle {
+  font-size: 12px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  width: 270px;
+  justify-content: space-between;
+}
+
+#main #toggle #day, #main #toggle #night, #main #toggle #normal {
+  width: 20%;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  transition: background-color 1s ease;
+}
+
+#main #toggle #day:hover, #main #toggle #night:hover, #main #toggle #normal:hover {
+  cursor: pointer;
+}
+
+#main #toggle #units {
+  display: flex;
+  border: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#main #toggle #units #celsius, #main #toggle #units #fahrenheit {
+  display: flex;
+  justify-content: center;
+  transition: background-color 1s ease;
+  width: 20px;
+  padding: 5px;
+}
+
+#main #toggle #units #celsius:hover, #main #toggle #units #fahrenheit:hover {
+  cursor: pointer;
+}
+
+body.day-theme {
+  background-color: #68D1FF;
+  color: white;
+}
+
+body.day-theme #main #toggle.day-theme #night, body.day-theme #main #toggle.day-theme #normal {
+  background-color: #68D1FF;
+  color: white;
+}
+
+body.day-theme #main #toggle.day-theme #day, body.day-theme #main #toggle.day-theme #day:hover, body.day-theme #main #toggle.day-theme #celsius.clicked, body.day-theme #main #toggle.day-theme #fahrenheit.clicked {
+  background-color: white;
+  color: #68D1FF;
+}
+
+body.day-theme #main #toggle.day-theme #night:hover, body.day-theme #main #toggle.day-theme #normal:hover, body.day-theme #main #toggle.day-theme #celsius:hover, body.day-theme #main #toggle.day-theme #fahrenheit:hover {
+  background-color: white;
+  color: #68D1FF;
+}
+
+body.night-theme {
+  background-color: #00103D;
+  color: white;
+}
+
+body.night-theme #main #toggle.night-theme #day, body.night-theme #main #toggle.night-theme #normal {
+  background-color: #00103D;
+  color: white;
+}
+
+body.night-theme #main #toggle.night-theme #night, body.night-theme #main #toggle.night-theme #night:hover, body.night-theme #main #toggle.night-theme #celsius.clicked, body.night-theme #main #toggle.night-theme #fahrenheit.clicked {
+  background-color: white;
+  color: #00103D;
+}
+
+body.night-theme #main #toggle.night-theme #day:hover, body.night-theme #main #toggle.night-theme #normal:hover, body.night-theme #main #toggle.night-theme #celsius:hover, body.night-theme #main #toggle.night-theme #fahrenheit:hover {
+  background-color: white;
+  color: #00103D;
+}
+
+body.normal-theme {
+  background-color: white;
+  color: black;
+}
+
+body.normal-theme #main #toggle.normal-theme #day, body.normal-theme #main #toggle.normal-theme #night {
+  background-color: white;
+  color: black;
+}
+
+body.normal-theme #main #toggle.normal-theme #normal, body.normal-theme #main #toggle.normal-theme #normal:hover, body.normal-theme #main #toggle.normal-theme #celsius.clicked, body.normal-theme #main #toggle.normal-theme #fahrenheit.clicked {
+  background-color: black;
+  color: white;
+}
+
+body.normal-theme #main #toggle.normal-theme #day:hover, body.normal-theme #main #toggle.normal-theme #night:hover, body.normal-theme #main #toggle.normal-theme #celsius:hover, body.normal-theme #main #toggle.normal-theme #fahrenheit:hover {
+  background-color: black;
+  color: white;
+}

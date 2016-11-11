@@ -1,0 +1,119 @@
+//output:index.html
+
+doctype html
+head
+  title Weather Forecast
+  meta(charset="utf-8")
+  meta(name="viewport" content="width=device-width, initial-scale=1")
+  link(rel="stylesheet" href="/css/stylesheet.css")
+  //- link(rel="stylesheet" href="http://www.acsu.buffalo.edu/~zhanhuil/weather-app/css/stylesheet.css")
+  link(href="https://fonts.googleapis.com/css?family=Lora|Quattrocento+Sans" rel="stylesheet")
+  script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js")
+  script(src="https://code.jquery.com/ui/1.12.0-rc.2/jquery-ui.min.js"   integrity="sha256-55Jz3pBCF8z9jBO1qQ7cIf0L+neuPTD1u7Ytzrp2dqo="   crossorigin="anonymous")
+  script(src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous")
+  script(src="/js/toggle.js")
+  //- script(src="http://www.acsu.buffalo.edu/~zhanhuil/weather-app/js/toggle.js")
+body(ng-app="WeatherApp" class="normal-theme")
+  #main(ng-controller="MainController")
+    .container
+      #header
+        #city {{ city }} 
+        //- #region {{ region }}
+        #current-cond-text {{ currentCondition.text }} 
+        #current-temp(ng-show="celsius") {{ currentTempC | number:0 }}
+        #current-temp(ng-show="fahrenheit") {{ currentTempF | number:0 }}
+        //- {{ todayDatetime | date:'EEEE' }} 
+        
+      #hourly
+        #current-hour
+          div now
+          img(ng-src="{{ currentCondition.icon }}")
+          .hourly-temp(ng-show="celsius") {{ currentTempC | number:0 }}
+          .hourly-temp(ng-show="fahrenheit") {{ currentTempF | number:0 }}
+          
+        //- .future-hour(ng-repeat="hour in forecast[0].hour")
+        //-   div {{ hour.time_epoch * 1000 | date:'h a' }}
+        //-   img(ng-src="{{ hour.condition.icon }}")
+        //-   .hourly-temp(ng-show="celsius") {{ hour.temp_c | number:0 }}
+        //-   .hourly-temp(ng-show="fahrenheit") {{ hour.temp_f | number:0 }}
+          
+        .future-hour(ng-repeat="hour in hourly")
+          div {{ hour.time_epoch * 1000 | date:'h a' }}
+          img(ng-src="{{ hour.icon }}")
+          .hourly-temp(ng-show="celsius") {{ hour.temp_c | number:0 }}
+          .hourly-temp(ng-show="fahrenheit") {{ hour.temp_f | number:0 }}
+        
+      .row(ng-repeat="day in forecast")
+        .day {{ (day.date_epoch + 14400) * 1000 | date:'EEEE' }}
+        .forecast
+          img.day-cond-icon(ng-src="{{ day.day.condition.icon }}")
+          .high(ng-show="celsius") {{ day.day.maxtemp_c | number:0 }}
+          .high(ng-show="fahrenheit") {{ day.day.maxtemp_f | number:0 }}
+          .low(ng-show="celsius") {{ day.day.mintemp_c | number:0 }}
+          .low(ng-show="fahrenheit") {{ day.day.mintemp_f | number:0 }}
+          
+      //- #header
+      //-   #city Amherst
+      //-   #current-temp 79
+      
+      //- 
+      //- .row
+      //-   .day Thursday
+      //-   .forecast
+      //-     .high 90
+      //-     .low 76
+      //- .row
+      //-   .day Friday
+      //-   .forecast
+      //-     .high 92
+      //-     .low 73
+      //-     
+      //- .row
+      //-   .day Saturday
+      //-   .forecast
+      //-     .high 89
+      //-     .low 73
+      //-     
+      //- .row
+      //-   .day Sunday
+      //-   .forecast
+      //-     .high 85
+      //-     .low 74
+      //- 
+      //- .row
+      //-   .day Monday
+      //-   .forecast
+      //-     .high 82
+      //-     .low 67
+      //- 
+      //- .row 
+      //-   .day Sunday
+      //-   .forecast
+      //-     .high 90
+      //-     .low 65
+          
+    #toggle.normal-theme
+      #units 
+        #celsius(ng-click="celsius=true; fahrenheit=false") c
+        div &nbsp;|&nbsp;
+        #fahrenheit.clicked(ng-click="celsius=false; fahrenheit=true") f
+      #day day
+      #night night
+      #normal bw
+      
+      
+        
+    // END container
+  // END main
+  
+  // Modules
+  script(src="/js/app.js")
+  //- script(src="http://www.acsu.buffalo.edu/~zhanhuil/weather-app/js/app.js")
+  
+  // Controllers
+  script(src="/js/controllers/MainController.js")
+  //- script(src="http://www.acsu.buffalo.edu/~zhanhuil/weather-app/js/controllers/MainController.js")
+  
+  // Services
+  script(src="/js/services/forecast.js")
+  //- script(src="http://www.acsu.buffalo.edu/~zhanhuil/weather-app/js/services/forecast.js")

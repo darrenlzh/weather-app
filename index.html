@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<head>
+  <title>Weather Forecast</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/stylesheet.css">
+  <link href="https://fonts.googleapis.com/css?family=Lora|Quattrocento+Sans" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0-rc.2/jquery-ui.min.js" integrity="sha256-55Jz3pBCF8z9jBO1qQ7cIf0L+neuPTD1u7Ytzrp2dqo=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+  <script src="/js/toggle.js"></script>
+</head>
+<body ng-app="WeatherApp" class="normal-theme">
+  <div id="main" ng-controller="MainController">
+    <div class="container">
+      <div id="header">
+        <div id="city">{{ city }} </div>
+        <div id="current-cond-text">{{ currentCondition.text }} </div>
+        <div id="current-temp" ng-show="celsius">{{ currentTempC | number:0 }}</div>
+        <div id="current-temp" ng-show="fahrenheit">{{ currentTempF | number:0 }}</div>
+      </div>
+      <div id="hourly">
+        <div id="current-hour">
+          <div>now</div><img ng-src="{{ currentCondition.icon }}">
+          <div ng-show="celsius" class="hourly-temp">{{ currentTempC | number:0 }}</div>
+          <div ng-show="fahrenheit" class="hourly-temp">{{ currentTempF | number:0 }}</div>
+        </div>
+        <div ng-repeat="hour in hourly" class="future-hour">
+          <div>{{ hour.time_epoch * 1000 | date:'h a' }}</div><img ng-src="{{ hour.icon }}">
+          <div ng-show="celsius" class="hourly-temp">{{ hour.temp_c | number:0 }}</div>
+          <div ng-show="fahrenheit" class="hourly-temp">{{ hour.temp_f | number:0 }}</div>
+        </div>
+      </div>
+      <div ng-repeat="day in forecast" class="row">
+        <div class="day">{{ (day.date_epoch + 14400) * 1000 | date:'EEEE' }}</div>
+        <div class="forecast"><img ng-src="{{ day.day.condition.icon }}" class="day-cond-icon">
+          <div ng-show="celsius" class="high">{{ day.day.maxtemp_c | number:0 }}</div>
+          <div ng-show="fahrenheit" class="high">{{ day.day.maxtemp_f | number:0 }}</div>
+          <div ng-show="celsius" class="low">{{ day.day.mintemp_c | number:0 }}</div>
+          <div ng-show="fahrenheit" class="low">{{ day.day.mintemp_f | number:0 }}</div>
+        </div>
+      </div>
+    </div>
+    <div id="toggle" class="normal-theme">
+      <div id="units"> 
+        <div id="celsius" ng-click="celsius=true; fahrenheit=false">c</div>
+        <div>&nbsp;|&nbsp;</div>
+        <div id="fahrenheit" ng-click="celsius=false; fahrenheit=true" class="clicked">f</div>
+      </div>
+      <div id="day">day</div>
+      <div id="night">night</div>
+      <div id="normal">bw</div>
+    </div>
+    <!-- END container-->
+  </div>
+  <!-- END main-->
+  <!-- Modules-->
+  <script src="/js/app.js"></script>
+  <!-- Controllers-->
+  <script src="/js/controllers/MainController.js"></script>
+  <!-- Services-->
+  <script src="/js/services/forecast.js"></script>
+</body>

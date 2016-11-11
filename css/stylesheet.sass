@@ -1,0 +1,214 @@
+$day-color: #68D1FF
+$night-color: #00103D
+
+body
+  transition: background-color 1s ease
+  margin: 0
+
+#main
+  display: flex
+  // font-family: 'Quattrocento Sans', sans-serif
+  font-family: 'Lora', serif
+  font-size: 15px
+  justify-content: center
+  align-items: center
+  height: 100vh
+  min-height: 600px
+  flex-direction: column
+
+  .container
+    display: flex
+    flex-direction: column
+    width: 320px
+    border-bottom: 1px solid
+    padding-bottom: 3px
+    overflow-x: hidden
+
+    #header
+      font-family: 'Lora', serif
+      justify-content: space-between
+      flex-direction: column
+      align-items: center
+      padding-bottom: 10px
+      margin-bottom: 3px
+      display: flex
+      border-bottom: 1px solid
+
+      #city
+        font-size: 35px
+
+      #region
+        font-size: 12px
+        margin-bottom: 5px
+
+      #current-cond-text
+        font-size: 10px
+        font-style: italic
+        margin-bottom: 10px
+
+      #current-temp
+        font-size: 70px
+
+    #hourly
+      display: flex
+      flex-direction: row
+      width: 310px
+      white-space: nowrap
+      overflow-x: scroll
+      -webkit-overflow-scrolling: touch
+      padding: 5px 5px 0 5px
+
+      &::-webkit-scrollbar
+        display: none
+
+      #current-hour, .future-hour
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        margin-right: 10px
+        flex-shrink: 0
+
+        div
+          font-size: 10px
+          margin-bottom: 5px
+        img
+          width: 30px
+          height: 30px
+          margin-bottom: 5px
+
+        .hourly-temp
+          font-size: 15px
+
+
+    > .row
+      border-top: 1px solid
+      padding-top: 10px
+
+    > .row ~ .row
+      border-top: none
+      padding-top: 0
+
+    .row
+      display: flex
+      flex-direction: row
+      margin: 1px
+      justify-content: space-between
+
+      .day
+        display: flex
+        justify-content: flex-start
+        width: 130px
+        padding-left: 10px
+
+      .forecast
+        display: flex
+        justify-content: space-around
+        width: 150px
+
+        img.day-cond-icon
+          width: 30px
+          height: 30px
+          margin: -5px 50px 0 0
+
+        .low
+          opacity: 0.6
+
+        .high, .low
+          width: 20px
+          display: flex
+          justify-content: center
+
+  #toggle
+    font-size: 12px
+    display: flex
+    flex-direction: row
+    margin-top: 10px
+    width: 270px
+    justify-content: space-between
+
+    #day, #night, #normal
+      width: 20%
+      padding: 5px
+      display: flex
+      justify-content: center
+      transition: background-color 1s ease
+
+    #day:hover, #night:hover, #normal:hover
+      cursor: pointer
+
+    #units
+      display: flex
+      border: none
+      flex-direction: row
+      justify-content: center
+      align-items: center
+
+      #celsius, #fahrenheit
+        display: flex
+        justify-content: center
+        transition: background-color 1s ease
+        width: 20px
+        padding: 5px
+
+      #celsius:hover, #fahrenheit:hover
+        cursor: pointer
+
+
+body.day-theme
+  background-color: $day-color
+  color: white
+
+  #main
+    #toggle.day-theme
+
+      #night, #normal
+        background-color: $day-color
+        color: white
+
+      #day, #day:hover, #celsius.clicked, #fahrenheit.clicked
+        background-color: white
+        color: $day-color
+
+      #night:hover, #normal:hover, #celsius:hover, #fahrenheit:hover
+        background-color: white
+        color: $day-color
+
+
+body.night-theme
+  background-color: $night-color
+  color: white
+
+  #main
+    #toggle.night-theme
+
+      #day, #normal
+        background-color: $night-color
+        color: white
+
+      #night, #night:hover, #celsius.clicked, #fahrenheit.clicked
+        background-color: white
+        color: $night-color
+
+      #day:hover, #normal:hover, #celsius:hover, #fahrenheit:hover
+        background-color: white
+        color: $night-color
+
+body.normal-theme
+  background-color: white
+  color: black
+
+  #main
+    #toggle.normal-theme
+
+      #day, #night
+        background-color: white
+        color: black
+
+      #normal, #normal:hover, #celsius.clicked, #fahrenheit.clicked
+        background-color: black
+        color: white
+
+      #day:hover, #night:hover, #celsius:hover, #fahrenheit:hover
+        background-color: black
+        color: white
